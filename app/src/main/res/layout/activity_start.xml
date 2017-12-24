@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/start_background">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:text="Welcome to We Talk"
+        android:textColor="@color/white"
+        android:textSize="30dp" />
+
+    <Button
+        android:id="@+id/btn_start_signin"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_below="@+id/textView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="75dp"
+        android:background="@color/red"
+        android:text="@string/have_account"
+        android:textColor="@color/white"
+        android:textSize="@dimen/default_font_size"
+        android:typeface="sans"/>
+
+    <Button
+        android:id="@+id/btn_start_reg"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_alignStart="@+id/btn_start_signin"
+        android:layout_below="@+id/btn_start_signin"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="28dp"
+        android:text="@string/need_account"
+        android:textColor="@color/black"
+        android:background="@color/white"
+        android:textSize="@dimen/default_font_size"
+        android:typeface="sans"/>
+
+
+</RelativeLayout>

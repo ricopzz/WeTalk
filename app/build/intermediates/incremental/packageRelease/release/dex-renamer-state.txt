@@ -1,0 +1,4 @@
+#Sun Dec 24 16:13:28 WIB 2017
+base.0=/Users/enrico/AndroidStudioProjects/MyApplication/app/build/intermediates/transforms/dex/release/0
+path.0=classes.dex
+renamed.0=classes.dex
