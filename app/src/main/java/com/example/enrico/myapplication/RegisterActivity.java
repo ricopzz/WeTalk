@@ -29,6 +29,7 @@ public class RegisterActivity extends Activity {
     private Button mReg;
     private TextView mBack;
     private TextView mSignIn;
+    private RSACryptography mRsa = new RSACryptography();
 
     private ProgressDialog mRegProgress;
 
@@ -64,12 +65,14 @@ public class RegisterActivity extends Activity {
                 String password = mPassword.getEditText().getText().toString();
                 String username = mUsername.getEditText().getText().toString();
 
+                byte[] encrypted = mRsa.encrypt(password.getBytes());
+
                 if(!TextUtils.isEmpty(fullName) && !TextUtils.isEmpty(email ) && !TextUtils.isEmpty(password) && !TextUtils.isEmpty(username)){
                     mRegProgress.setTitle("Registering User");
                     mRegProgress.setMessage("Please wait while we are registering user");
                     mRegProgress.setCanceledOnTouchOutside(false);
                     mRegProgress.show();
-                    register_user(fullName, email, username, password);
+                    register_user(fullName,email, username, password);
                 }
                 else{
                     Toast.makeText(RegisterActivity.this,"Cannot Register. Please fill in all blanks.", Toast.LENGTH_LONG).show();
@@ -116,6 +119,7 @@ public class RegisterActivity extends Activity {
                     mRegProgress.dismiss();
 
                     Intent mainIntent = new Intent(RegisterActivity.this, MainActivity.class);
+                    mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(mainIntent);
                     finish();
                 } else {

@@ -10,10 +10,10 @@ public final class R {
     public static final class attr {
         public static final int buttonSize = 0x7f030047;
         public static final int circleCrop = 0x7f03004e;
-        public static final int colorScheme = 0x7f03005f;
-        public static final int imageAspectRatio = 0x7f0300ab;
-        public static final int imageAspectRatioAdjust = 0x7f0300ac;
-        public static final int scopeUris = 0x7f030121;
+        public static final int colorScheme = 0x7f030064;
+        public static final int imageAspectRatio = 0x7f0300b0;
+        public static final int imageAspectRatioAdjust = 0x7f0300b1;
+        public static final int scopeUris = 0x7f030126;
     }
     public static final class color {
         public static final int common_google_signin_btn_text_dark = 0x7f05002a;
@@ -59,14 +59,14 @@ public final class R {
         public static final int dark = 0x7f080041;
         public static final int icon_only = 0x7f08005c;
         public static final int light = 0x7f080065;
-        public static final int none = 0x7f080077;
-        public static final int normal = 0x7f080078;
-        public static final int radio = 0x7f080084;
-        public static final int standard = 0x7f0800af;
-        public static final int text = 0x7f0800b5;
-        public static final int text2 = 0x7f0800b6;
-        public static final int wide = 0x7f0800d7;
-        public static final int wrap_content = 0x7f0800da;
+        public static final int none = 0x7f080078;
+        public static final int normal = 0x7f080079;
+        public static final int radio = 0x7f080085;
+        public static final int standard = 0x7f0800b0;
+        public static final int text = 0x7f0800b7;
+        public static final int text2 = 0x7f0800b8;
+        public static final int wide = 0x7f0800d9;
+        public static final int wrap_content = 0x7f0800dc;
     }
     public static final class integer {
         public static final int google_play_services_version = 0x7f090007;
@@ -94,11 +94,11 @@ public final class R {
         public static final int gcm_fallback_notification_channel_label = 0x7f0d003f;
     }
     public static final class styleable {
-        public static final int[] LoadingImageView = { 0x7f03004e, 0x7f0300ab, 0x7f0300ac };
+        public static final int[] LoadingImageView = { 0x7f03004e, 0x7f0300b0, 0x7f0300b1 };
         public static final int LoadingImageView_circleCrop = 0;
         public static final int LoadingImageView_imageAspectRatio = 1;
         public static final int LoadingImageView_imageAspectRatioAdjust = 2;
-        public static final int[] SignInButton = { 0x7f030047, 0x7f03005f, 0x7f030121 };
+        public static final int[] SignInButton = { 0x7f030047, 0x7f030064, 0x7f030126 };
         public static final int SignInButton_buttonSize = 0;
         public static final int SignInButton_colorScheme = 1;
         public static final int SignInButton_scopeUris = 2;

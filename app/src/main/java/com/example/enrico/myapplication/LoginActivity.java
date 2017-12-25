@@ -27,6 +27,7 @@ public class LoginActivity extends AppCompatActivity {
     private TextView mFPass;
     private FirebaseAuth mAuth;
     private ProgressDialog mLoginProgress;
+    private RSACryptography mRSA = new RSACryptography();
 
 
     @Override
@@ -64,6 +65,10 @@ public class LoginActivity extends AppCompatActivity {
                 String email = mEmail.getText().toString();
                 String password = mPassword.getText().toString();
 
+                byte[] convertEmail = mRSA.encrypt(email.getBytes());
+
+                String encrypted = convertEmail.toString();
+
                 if(!TextUtils.isEmpty(email)&&!TextUtils.isEmpty(password)){
                     mLoginProgress.setTitle("Logging In");
                     mLoginProgress.setMessage("Please wait while we check your credentials");
@@ -94,6 +99,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private void goToMain() {
         Intent goIntent = new Intent(LoginActivity.this,MainActivity.class);
+        goIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(goIntent);
         finish();
     }

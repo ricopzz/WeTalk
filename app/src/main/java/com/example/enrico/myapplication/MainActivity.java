@@ -1,12 +1,14 @@
 package com.example.enrico.myapplication;
 
 
+import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.content.Intent;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.support.v4.view.ViewPager;
 
 import com.firebase.client.Firebase;
 import com.google.firebase.auth.FirebaseAuth;
@@ -17,6 +19,11 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private Toolbar mToolbar;
 
+    private ViewPager mViewPager;
+    private SectionsPagerAdapter mSectionPagerAdapter; // for tab pages
+
+    private TabLayout mTabLayout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,8 +32,15 @@ public class MainActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         mToolbar = (Toolbar) findViewById(R.id.main_page_toolbar);
         setSupportActionBar(mToolbar);
-        getSupportActionBar().setTitle("Test Chat");
+        getSupportActionBar().setTitle("We Talk"); // set title of action bar
 
+        //Tabs
+        mViewPager = (ViewPager) findViewById(R.id.tabPager);
+        mSectionPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());
+        mViewPager.setAdapter(mSectionPagerAdapter); // create each page
+
+        mTabLayout = (TabLayout) findViewById(R.id.main_tab);
+        mTabLayout.setupWithViewPager(mViewPager);
     }
 
     @Override
@@ -46,12 +60,10 @@ public class MainActivity extends AppCompatActivity {
         finish();
     }
 
-    @Override
+    @Override // creates main menu options
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
-
         getMenuInflater().inflate(R.menu.main_menu, menu);
-
 
         return true;
     }
@@ -59,6 +71,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         super.onOptionsItemSelected(item);
+        // if signout is chose
         if(item.getItemId() == R.id.btn_menu_signout){
             FirebaseAuth.getInstance().signOut();
             sendToStart();
