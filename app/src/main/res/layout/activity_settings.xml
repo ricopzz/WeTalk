@@ -7,6 +7,69 @@
     android:background="@color/colorPrimaryDark"
     tools:context="com.example.enrico.myapplication.SettingsActivity">
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentStart="true"
+        android:layout_alignTop="@+id/pic_settings"
+        android:layout_marginTop="92dp"
+        android:background="@color/white">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="110dp"
+            android:text="Display Name"
+            android:textSize="32sp"
+            android:textColor="@color/black"
+            android:textAlignment="center"
+            android:padding="0dp"
+            android:id="@+id/settings_displayname" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/settings_displayname"
+            android:layout_marginTop="12dp"
+            android:text="Hi there, I'm using We Talk!"
+            android:textAlignment="center"
+            android:textColor="@color/grey"
+            android:textSize="@dimen/default_font_size"
+            android:id="@+id/settings_status" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/settings_status"
+            android:layout_marginTop="186dp"
+            android:orientation="horizontal"
+            android:background="@color/grey">
+            
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="0.33"
+                android:id="@+id/settings_changestatus"
+                />
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="0.33"
+                android:id="@+id/settings_changepicture"
+                />
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="0.33"/>
+            
+        </LinearLayout>
+
+    </RelativeLayout>
+
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/pic_settings"
         android:layout_width="175dp"

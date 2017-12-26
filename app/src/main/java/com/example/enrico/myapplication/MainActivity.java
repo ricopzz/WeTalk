@@ -72,9 +72,14 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         super.onOptionsItemSelected(item);
         // if signout is chose
-        if(item.getItemId() == R.id.btn_menu_signout){
+        if(item.getItemId() == R.id.btn_menu_signout) {
             FirebaseAuth.getInstance().signOut();
             sendToStart();
+        }
+
+        if(item.getItemId() == R.id.btn_menu_settings){
+            Intent settingsIntent = new Intent(MainActivity.this, SettingsActivity.class);
+            startActivity(settingsIntent);
         }
 
         return true;

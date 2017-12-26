@@ -45,6 +45,7 @@
         <activity android:name="com.example.enrico.myapplication.RegisterActivity" />
         <activity android:name="com.example.enrico.myapplication.LoginActivity" />
         <activity android:name="com.example.enrico.myapplication.SettingsActivity" />
+        <activity android:name="com.example.enrico.myapplication.StatusActivity" />
 
         <meta-data
             android:name="android.support.VERSION"

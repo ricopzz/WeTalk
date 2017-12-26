@@ -13,10 +13,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.content.Intent;
 
+import com.firebase.client.Firebase;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.HashMap;
 
 public class RegisterActivity extends Activity {
 
@@ -33,6 +39,7 @@ public class RegisterActivity extends Activity {
 
     private ProgressDialog mRegProgress;
 
+    private DatabaseReference mDatabase;
     //Firebae Auth
     private FirebaseAuth mAuth;
 
@@ -55,6 +62,7 @@ public class RegisterActivity extends Activity {
         mBack = (TextView) findViewById(R.id.btn_reg_back);
         mSignIn = (TextView) findViewById(R.id.btn_reg_signin);
         mRegProgress = new ProgressDialog(this);
+
 
         mReg.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -109,19 +117,42 @@ public class RegisterActivity extends Activity {
         finish();
     }
 
-    private void register_user(String fullName, String email, String username, String password){
+    private void register_user(final String fullName, String email, final String username, String password){
 
         mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
-                    //Sign in success
-                    mRegProgress.dismiss();
 
-                    Intent mainIntent = new Intent(RegisterActivity.this, MainActivity.class);
-                    mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                    startActivity(mainIntent);
-                    finish();
+                    FirebaseUser current_user = FirebaseAuth.getInstance().getCurrentUser();
+                    String uid = current_user.getUid();
+
+                    mDatabase = FirebaseDatabase.getInstance().getReference().child("Users").child(uid);
+
+                    HashMap<String, String> usermap = new HashMap<>();
+                    usermap.put("name",fullName);
+                    usermap.put("status","Hi there, I'm using We Talk!");
+                    usermap.put("username",username);
+                    usermap.put("image","default");
+                    usermap.put("thumb_image","default");
+
+                    mDatabase.setValue(usermap).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if(task.isSuccessful()){
+                                //Sign in success
+                                mRegProgress.dismiss();
+
+                                Intent mainIntent = new Intent(RegisterActivity.this, MainActivity.class);
+                                mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                startActivity(mainIntent);
+                                finish();
+                            }
+                        }
+                    });
+
+
+
                 } else {
                     mRegProgress.hide();
                     Toast.makeText(RegisterActivity.this,"Cannot Register. Invalid Email Address.", Toast.LENGTH_LONG).show();

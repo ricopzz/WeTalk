@@ -228,6 +228,8 @@
             <enum name="multiply" value="14"/>
             
             <enum name="screen" value="15"/>
+            
+            <enum name="add" value="16"/>
         </attr></declare-styleable>
     <declare-styleable name="AppCompatSeekBar"><attr name="android:thumb"/><attr format="reference" name="tickMark"/><attr format="color" name="tickMarkTint"/><attr name="tickMarkTintMode">
             
@@ -323,6 +325,8 @@
             <enum name="multiply" value="14"/>
             
             <enum name="screen" value="15"/>
+            
+            <enum name="add" value="16"/>
         </attr></declare-styleable>
     <declare-styleable name="ConstraintLayout_Layout"><attr name="android:orientation"/><attr name="android:minWidth"/><attr name="android:minHeight"/><attr name="android:maxWidth"/><attr name="android:maxHeight"/><attr name="layout_optimizationLevel"/><attr name="constraintSet"/><attr name="layout_constraintGuide_begin"/><attr name="layout_constraintGuide_end"/><attr name="layout_constraintGuide_percent"/><attr name="layout_constraintLeft_toLeftOf"/><attr name="layout_constraintLeft_toRightOf"/><attr name="layout_constraintRight_toLeftOf"/><attr name="layout_constraintRight_toRightOf"/><attr name="layout_constraintTop_toTopOf"/><attr name="layout_constraintTop_toBottomOf"/><attr name="layout_constraintBottom_toTopOf"/><attr name="layout_constraintBottom_toBottomOf"/><attr name="layout_constraintBaseline_toBaselineOf"/><attr name="layout_constraintStart_toEndOf"/><attr name="layout_constraintStart_toStartOf"/><attr name="layout_constraintEnd_toStartOf"/><attr name="layout_constraintEnd_toEndOf"/><attr name="layout_goneMarginLeft"/><attr name="layout_goneMarginTop"/><attr name="layout_goneMarginRight"/><attr name="layout_goneMarginBottom"/><attr name="layout_goneMarginStart"/><attr name="layout_goneMarginEnd"/><attr name="layout_constraintHorizontal_bias"/><attr name="layout_constraintVertical_bias"/><attr name="layout_constraintWidth_default"/><attr name="layout_constraintHeight_default"/><attr name="layout_constraintWidth_min"/><attr name="layout_constraintWidth_max"/><attr name="layout_constraintHeight_min"/><attr name="layout_constraintHeight_max"/><attr name="layout_constraintLeft_creator"/><attr name="layout_constraintTop_creator"/><attr name="layout_constraintRight_creator"/><attr name="layout_constraintBottom_creator"/><attr name="layout_constraintBaseline_creator"/><attr name="layout_constraintDimensionRatio"/><attr name="layout_constraintHorizontal_weight"/><attr name="layout_constraintVertical_weight"/><attr name="layout_constraintHorizontal_chainStyle"/><attr name="layout_constraintVertical_chainStyle"/><attr name="layout_editor_absoluteX"/><attr name="layout_editor_absoluteY"/></declare-styleable>
     <declare-styleable name="ConstraintSet"><attr name="android:orientation"/><attr name="android:id"/><attr name="android:visibility"/><attr name="android:alpha"/><attr name="android:elevation"/><attr name="android:rotationX"/><attr name="android:rotationY"/><attr name="android:scaleX"/><attr name="android:scaleY"/><attr name="android:transformPivotX"/><attr name="android:transformPivotY"/><attr name="android:translationX"/><attr name="android:translationY"/><attr name="android:translationZ"/><attr name="android:layout_width"/><attr name="android:layout_height"/><attr name="android:layout_marginStart"/><attr name="android:layout_marginBottom"/><attr name="android:layout_marginTop"/><attr name="android:layout_marginEnd"/><attr name="android:layout_marginLeft"/><attr name="android:layout_marginRight"/><attr name="layout_constraintGuide_begin"/><attr name="layout_constraintGuide_end"/><attr name="layout_constraintGuide_percent"/><attr name="layout_constraintLeft_toLeftOf"/><attr name="layout_constraintLeft_toRightOf"/><attr name="layout_constraintRight_toLeftOf"/><attr name="layout_constraintRight_toRightOf"/><attr name="layout_constraintTop_toTopOf"/><attr name="layout_constraintTop_toBottomOf"/><attr name="layout_constraintBottom_toTopOf"/><attr name="layout_constraintBottom_toBottomOf"/><attr name="layout_constraintBaseline_toBaselineOf"/><attr name="layout_constraintStart_toEndOf"/><attr name="layout_constraintStart_toStartOf"/><attr name="layout_constraintEnd_toStartOf"/><attr name="layout_constraintEnd_toEndOf"/><attr name="layout_goneMarginLeft"/><attr name="layout_goneMarginTop"/><attr name="layout_goneMarginRight"/><attr name="layout_goneMarginBottom"/><attr name="layout_goneMarginStart"/><attr name="layout_goneMarginEnd"/><attr name="layout_constraintHorizontal_bias"/><attr name="layout_constraintVertical_bias"/><attr name="layout_constraintWidth_default"/><attr name="layout_constraintHeight_default"/><attr name="layout_constraintWidth_min"/><attr name="layout_constraintWidth_max"/><attr name="layout_constraintHeight_min"/><attr name="layout_constraintHeight_max"/><attr name="layout_constraintLeft_creator"/><attr name="layout_constraintTop_creator"/><attr name="layout_constraintRight_creator"/><attr name="layout_constraintBottom_creator"/><attr name="layout_constraintBaseline_creator"/><attr name="layout_constraintDimensionRatio"/><attr name="layout_constraintHorizontal_weight"/><attr name="layout_constraintVertical_weight"/><attr name="layout_constraintHorizontal_chainStyle"/><attr name="layout_constraintVertical_chainStyle"/><attr name="layout_editor_absoluteX"/><attr name="layout_editor_absoluteY"/></declare-styleable>
@@ -389,6 +393,19 @@
             
             <flag name="all" value="0x77"/>
         </attr></declare-styleable>
+    <declare-styleable name="CropImageView"><attr name="cropGuidelines">
+            <enum name="off" value="0"/>
+            <enum name="onTouch" value="1"/>
+            <enum name="on" value="2"/>
+        </attr><attr name="cropScaleType">
+            <enum name="fitCenter" value="0"/>
+            <enum name="center" value="1"/>
+            <enum name="centerCrop" value="2"/>
+            <enum name="centerInside" value="3"/>
+        </attr><attr name="cropShape">
+            <enum name="rectangle" value="0"/>
+            <enum name="oval" value="1"/>
+        </attr><attr format="boolean" name="cropAutoZoomEnabled"/><attr format="integer" name="cropMaxZoom"/><attr format="boolean" name="cropMultiTouchEnabled"/><attr format="boolean" name="cropFixAspectRatio"/><attr format="integer" name="cropAspectRatioX"/><attr format="integer" name="cropAspectRatioY"/><attr format="float" name="cropInitialCropWindowPaddingRatio"/><attr format="dimension" name="cropBorderLineThickness"/><attr format="color" name="cropBorderLineColor"/><attr format="dimension" name="cropBorderCornerThickness"/><attr format="dimension" name="cropBorderCornerOffset"/><attr format="dimension" name="cropBorderCornerLength"/><attr format="color" name="cropBorderCornerColor"/><attr format="dimension" name="cropGuidelinesThickness"/><attr format="color" name="cropGuidelinesColor"/><attr format="color" name="cropBackgroundColor"/><attr format="dimension" name="cropSnapRadius"/><attr format="dimension" name="cropTouchRadius"/><attr format="boolean" name="cropSaveBitmapToInstanceState"/><attr format="boolean" name="cropShowCropOverlay"/><attr format="boolean" name="cropShowProgressBar"/><attr format="dimension" name="cropMinCropWindowWidth"/><attr format="dimension" name="cropMinCropWindowHeight"/><attr format="float" name="cropMinCropResultWidthPX"/><attr format="float" name="cropMinCropResultHeightPX"/><attr format="float" name="cropMaxCropResultWidthPX"/><attr format="float" name="cropMaxCropResultHeightPX"/><attr format="boolean" name="cropFlipHorizontally"/><attr format="boolean" name="cropFlipVertically"/></declare-styleable>
     <declare-styleable name="DesignTheme"><attr format="reference" name="bottomSheetDialogTheme"/><attr format="reference" name="bottomSheetStyle"/><attr format="reference|color" name="textColorError"/></declare-styleable>
     <declare-styleable name="DrawerArrowToggle"><attr format="color" name="color"/><attr format="boolean" name="spinBars"/><attr format="dimension" name="drawableSize"/><attr format="dimension" name="gapBetweenBars"/><attr format="dimension" name="arrowHeadLength"/><attr format="dimension" name="arrowShaftLength"/><attr format="dimension" name="barLength"/><attr format="dimension" name="thickness"/></declare-styleable>
     <declare-styleable name="FloatingActionButton"><attr name="backgroundTint"/><attr name="backgroundTintMode"/><attr format="color" name="rippleColor"/><attr name="fabSize">
@@ -412,7 +429,7 @@
     <declare-styleable name="FontFamilyFont"><attr name="fontStyle">
             <enum name="normal" value="0"/>
             <enum name="italic" value="1"/>
-        </attr><attr format="reference" name="font"/><attr format="integer" name="fontWeight"/></declare-styleable>
+        </attr><attr format="reference" name="font"/><attr format="integer" name="fontWeight"/><attr name="android:fontStyle"/><attr name="android:font"/><attr name="android:fontWeight"/></declare-styleable>
     <declare-styleable name="ForegroundLinearLayout"><attr name="android:foreground"/><attr name="android:foregroundGravity"/><attr format="boolean" name="foregroundInsidePadding"/></declare-styleable>
     <declare-styleable name="LinearConstraintLayout"><attr name="android:orientation"/></declare-styleable>
     <declare-styleable name="LinearLayoutCompat"><attr name="android:orientation"/><attr name="android:gravity"/><attr name="android:baselineAligned"/><attr name="android:baselineAlignedChildIndex"/><attr name="android:weightSum"/><attr format="boolean" name="measureWithLargestChild"/><attr name="divider"/><attr name="showDividers">
@@ -563,6 +580,8 @@
             <enum name="multiply" value="14"/>
             
             <enum name="screen" value="15"/>
+            
+            <enum name="add" value="16"/>
         </attr></declare-styleable>
     <declare-styleable name="ViewStubCompat"><attr name="android:layout"/><attr name="android:inflatedId"/><attr name="android:id"/></declare-styleable>
     <dimen name="abc_action_bar_content_inset_material">16dp</dimen>
@@ -738,6 +757,7 @@
     <item name="save_non_transition_alpha" type="id"/>
     <item name="save_scale_type" type="id"/>
     <item name="split_action_bar" type="id"/>
+    <item name="tag_transition_group" type="id"/>
     <item name="text" type="id"/>
     <item name="text2" type="id"/>
     <item name="textinput_counter" type="id"/>
@@ -762,8 +782,6 @@
     <integer name="show_password_duration">200</integer>
     <integer name="status_bar_notification_info_maxnum">999</integer>
     <string name="abc_action_bar_home_description">Navigate home</string>
-    <string name="abc_action_bar_home_description_format">%1$s, %2$s</string>
-    <string name="abc_action_bar_home_subtitle_description_format">%1$s, %2$s, %3$s</string>
     <string name="abc_action_bar_up_description">Navigate up</string>
     <string name="abc_action_menu_overflow_description">More options</string>
     <string name="abc_action_mode_done">Done</string>
@@ -790,7 +808,7 @@
     <string name="abc_searchview_description_submit">Submit query</string>
     <string name="abc_searchview_description_voice">Voice search</string>
     <string name="abc_shareactionprovider_share_with">Share with</string>
-    <string name="abc_shareactionprovider_share_with_application">Share with %s</string>
+    <string name="abc_shareactionprovider_share_with_application">Share with <ns1:g example="Mail" id="application_name">%s</ns1:g></string>
     <string name="abc_toolbar_collapse_description">Collapse</string>
     <string name="appbar_scrolling_view_behavior" translatable="false">android.support.design.widget.AppBarLayout$ScrollingViewBehavior</string>
     <string name="bottom_sheet_behavior" translatable="false">android.support.design.widget.BottomSheetBehavior</string>
@@ -813,6 +831,14 @@
     <string name="common_open_on_phone">Open on phone</string>
     <string name="common_signin_button_text">Sign in</string>
     <string name="common_signin_button_text_long">Sign in with Google</string>
+    <string name="crop_image_activity_no_permissions">Cancelling, required permissions are not granted</string>
+    <string name="crop_image_activity_title"/>
+    <string name="crop_image_menu_crop">Crop</string>
+    <string name="crop_image_menu_flip">Flip</string>
+    <string name="crop_image_menu_flip_horizontally">Flip horizontally</string>
+    <string name="crop_image_menu_flip_vertically">Flip vertically</string>
+    <string name="crop_image_menu_rotate_left">Rotate counter clockwise</string>
+    <string name="crop_image_menu_rotate_right">Rotate</string>
     <string name="fcm_fallback_notification_channel_label">Miscellaneous</string>
     <string name="gcm_fallback_notification_channel_label">Miscellaneous</string>
     <string name="password_toggle_content_description">Toggle password visibility</string>
@@ -820,6 +846,7 @@
     <string name="path_password_eye_mask_strike_through" translatable="false">M2,4.27 L19.73,22 L22.27,19.46 L4.54,1.73 L4.54,1 L23,1 L23,23 L1,23 L1,4.27 Z</string>
     <string name="path_password_eye_mask_visible" translatable="false">M2,4.27 L2,4.27 L4.54,1.73 L4.54,1.73 L4.54,1 L23,1 L23,23 L1,23 L1,4.27 Z</string>
     <string name="path_password_strike_through" translatable="false">M3.27,4.27 L19.74,20.74</string>
+    <string name="pick_image_intent_chooser_title">Select source</string>
     <string name="search_menu_title">Search</string>
     <string name="status_bar_notification_info_overflow">999+</string>
     <style name="AlertDialog.AppCompat" parent="Base.AlertDialog.AppCompat"/>
@@ -2049,22 +2076,6 @@
     <style name="TextAppearance.AppCompat.Medium" parent="Base.TextAppearance.AppCompat.Medium"/>
     <style name="TextAppearance.AppCompat.Medium.Inverse" parent="Base.TextAppearance.AppCompat.Medium.Inverse"/>
     <style name="TextAppearance.AppCompat.Menu" parent="Base.TextAppearance.AppCompat.Menu"/>
-    <style name="TextAppearance.AppCompat.Notification" parent="@android:style/TextAppearance.StatusBar.EventContent"/>
-    <style name="TextAppearance.AppCompat.Notification.Info">
-        <item name="android:textSize">12sp</item>
-        <item name="android:textColor">?android:attr/textColorSecondary</item>
-    </style>
-    <style name="TextAppearance.AppCompat.Notification.Info.Media"/>
-    <style name="TextAppearance.AppCompat.Notification.Line2" parent="TextAppearance.AppCompat.Notification.Info"/>
-    <style name="TextAppearance.AppCompat.Notification.Line2.Media" parent="TextAppearance.AppCompat.Notification.Info.Media"/>
-    <style name="TextAppearance.AppCompat.Notification.Media"/>
-    <style name="TextAppearance.AppCompat.Notification.Time">
-        <item name="android:textSize">12sp</item>
-        <item name="android:textColor">?android:attr/textColorSecondary</item>
-    </style>
-    <style name="TextAppearance.AppCompat.Notification.Time.Media"/>
-    <style name="TextAppearance.AppCompat.Notification.Title" parent="@android:style/TextAppearance.StatusBar.EventContent.Title"/>
-    <style name="TextAppearance.AppCompat.Notification.Title.Media"/>
     <style name="TextAppearance.AppCompat.SearchResult.Subtitle" parent="Base.TextAppearance.AppCompat.SearchResult.Subtitle">
     </style>
     <style name="TextAppearance.AppCompat.SearchResult.Title" parent="Base.TextAppearance.AppCompat.SearchResult.Title">
