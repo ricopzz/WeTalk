@@ -1,5 +1,6 @@
 package com.example.enrico.myapplication;
 
+import android.app.ProgressDialog;
 import android.net.Uri;
 import android.os.Build;
 import android.support.annotation.NonNull;
@@ -10,6 +11,7 @@ import android.view.View;
 import android.widget.TextView;
 import android.content.Intent;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.firebase.client.Firebase;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -24,6 +26,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.squareup.picasso.Picasso;
 import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
 
@@ -42,10 +45,13 @@ public class SettingsActivity extends AppCompatActivity {
     private TextView mStatus;
     private Button mChangeStatus;
     private Button mChangePicture;
+    private RSACryptography mRsa = new RSACryptography();
 
     private static final int GALLERY_PICK = 1;
 
     private StorageReference mImageStorage;
+
+    private ProgressDialog mProgressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,7 +74,11 @@ public class SettingsActivity extends AppCompatActivity {
         mUserDb.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+
                 String name = dataSnapshot.child("name").getValue().toString();
+                byte[] encrypted_name = name.getBytes();
+                String DECRYPTED_name = mRsa.decrypt(encrypted_name).toString();
+                Toast.makeText(SettingsActivity.this,name,Toast.LENGTH_LONG).show();
                 String img = dataSnapshot.child("image").getValue().toString();
                 String status = dataSnapshot.child("status").getValue().toString();
                 String thumb_img = dataSnapshot.child("thumb_image").getValue().toString();
@@ -76,6 +86,7 @@ public class SettingsActivity extends AppCompatActivity {
 
                 mDisplayName.setText(name);
                 mStatus.setText(status);
+                Picasso.with(SettingsActivity.this).load(img).into(mDisplayImage);
 
             }
 
@@ -127,14 +138,33 @@ public class SettingsActivity extends AppCompatActivity {
         if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
             CropImage.ActivityResult result = CropImage.getActivityResult(data); // the cropped result
             if (resultCode == RESULT_OK) {
+                mProgressDialog = new ProgressDialog(SettingsActivity.this);
+                mProgressDialog.setTitle("Uploading image");
+                mProgressDialog.setMessage("Please wait while we upload and process the image");
+                mProgressDialog.setCanceledOnTouchOutside(false);
+                mProgressDialog.show();
                 Uri resultUri = result.getUri(); // to get the uri
-                StorageReference filepath = mImageStorage.child("profile_images").child(randomGenerator()+".jpg");
+                String uid = mCurrentUser.getUid();
+                StorageReference filepath = mImageStorage.child("profile_images").child(uid+".jpg");
                 filepath.putFile(resultUri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
                         if(task.isSuccessful()){
+                            String download_URL = task.getResult().getDownloadUrl().toString();
+                            mUserDb.child("image").setValue(download_URL).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if(task.isSuccessful()){
+                                        mProgressDialog.dismiss();
+                                    } else {
+
+                                    }
+                                }
+                            });
 
                         } else {
+                            Toast.makeText(SettingsActivity.this,"Fail uploading image",Toast.LENGTH_LONG).show();
+                            mProgressDialog.dismiss();
 
                         }
                     }

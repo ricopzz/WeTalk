@@ -1,7 +1,27 @@
 #Internal package file, do not edit.
-#Tue Dec 26 20:29:23 WIB 2017
-0.baseType=DIRECTORY
-0.base=/Users/enrico/AndroidStudioProjects/MyApplication/app/build/intermediates/transforms/dexMerger/debug/94
+#Wed Dec 27 01:50:43 WIB 2017
+2.base=/Users/enrico/AndroidStudioProjects/MyApplication/app/build/intermediates/transforms/dexMerger/debug/108
+5.set=DEX
 0.path=classes.dex
+2.baseType=DIRECTORY
+3.base=/Users/enrico/AndroidStudioProjects/MyApplication/app/build/intermediates/transforms/dexMerger/debug/106
+2.set=DEX
+1.path=classes.dex
+4.base=/Users/enrico/AndroidStudioProjects/MyApplication/app/build/intermediates/transforms/dexMerger/debug/110
+count=6
+5.baseType=DIRECTORY
+2.path=classes.dex
+5.base=/Users/enrico/AndroidStudioProjects/MyApplication/app/build/intermediates/transforms/dexMerger/debug/111
+4.set=DEX
+3.path=classes.dex
+3.baseType=DIRECTORY
+1.set=DEX
+4.path=classes.dex
+1.baseType=DIRECTORY
+5.path=classes.dex
+0.base=/Users/enrico/AndroidStudioProjects/MyApplication/app/build/intermediates/transforms/dexMerger/debug/109
+0.baseType=DIRECTORY
+3.set=DEX
+1.base=/Users/enrico/AndroidStudioProjects/MyApplication/app/build/intermediates/transforms/dexMerger/debug/107
+4.baseType=DIRECTORY
 0.set=DEX
-count=1

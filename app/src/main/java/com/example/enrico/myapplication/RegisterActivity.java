@@ -12,17 +12,20 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.content.Intent;
+import java.util.HashMap;
 
 import com.firebase.client.Firebase;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
+import com.google.firebase.auth.FirebaseAuthUserCollisionException;
+import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.util.HashMap;
 
 public class RegisterActivity extends Activity {
 
@@ -117,7 +120,7 @@ public class RegisterActivity extends Activity {
         finish();
     }
 
-    private void register_user(final String fullName, String email, final String username, String password){
+    private void register_user(final String fullName, String email, final String username, final String password){
 
         mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
@@ -130,11 +133,16 @@ public class RegisterActivity extends Activity {
                     mDatabase = FirebaseDatabase.getInstance().getReference().child("Users").child(uid);
 
                     HashMap<String, String> usermap = new HashMap<>();
+                    byte[] encryptedName = mRsa.encrypt(fullName.getBytes());
+                    byte[] encryptedStatus = mRsa.encrypt("Hi there, I'm using We Talk!".getBytes());
+                    byte[] encryptedUsername = mRsa.encrypt(username.getBytes());
+                    byte[] encryptedImage = mRsa.encrypt("https://ind.proz.com/zf/images/default_user_512px.png".getBytes());
+                    byte[] encryptedThumb = mRsa.encrypt("default".getBytes());
                     usermap.put("name",fullName);
                     usermap.put("status","Hi there, I'm using We Talk!");
                     usermap.put("username",username);
-                    usermap.put("image","default");
-                    usermap.put("thumb_image","default");
+                    usermap.put("image","https://ind.proz.com/zf/images/default_user_512px.png");
+                    usermap.put("thumb_image","DEFAULT");
 
                     mDatabase.setValue(usermap).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
@@ -148,13 +156,28 @@ public class RegisterActivity extends Activity {
                                 startActivity(mainIntent);
                                 finish();
                             }
+                            else{
+
+                            }
                         }
                     });
 
-
-
                 } else {
                     mRegProgress.hide();
+//                    try {
+//                        throw task.getException();
+//                    } catch(FirebaseAuthWeakPasswordException e) {
+//                        mPassword.setError(getString(R.string.error_incorrect_password));
+//                        mPassword.requestFocus();
+//                    } catch(FirebaseAuthInvalidCredentialsException e) {
+//                        mEmail.setError(getString(R.string.error_invalid_email));
+//                        mEmail.requestFocus();
+//                    } catch(FirebaseAuthUserCollisionException e) {
+//                        mEmail.setError(getString(R.string.error));
+//                        mEmail.requestFocus();
+//                    } catch(Exception e) {
+//                        Log.e(TAG, e.getMessage());
+//                    }
                     Toast.makeText(RegisterActivity.this,"Cannot Register. Invalid Email Address.", Toast.LENGTH_LONG).show();
                 }
             }
