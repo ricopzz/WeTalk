@@ -25,6 +25,7 @@ import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.iid.FirebaseInstanceId;
 
 
 public class RegisterActivity extends Activity {
@@ -131,6 +132,7 @@ public class RegisterActivity extends Activity {
                     String uid = current_user.getUid();
 
                     mDatabase = FirebaseDatabase.getInstance().getReference().child("Users").child(uid);
+                    String deviceToken = FirebaseInstanceId.getInstance().getToken();
 
                     HashMap<String, String> usermap = new HashMap<>();
                     byte[] encryptedName = mRsa.encrypt(fullName.getBytes());
@@ -143,6 +145,7 @@ public class RegisterActivity extends Activity {
                     usermap.put("username",username);
                     usermap.put("image","https://ind.proz.com/zf/images/default_user_512px.png");
                     usermap.put("thumb_image","DEFAULT");
+                    usermap.put("device_token",deviceToken);
 
                     mDatabase.setValue(usermap).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override

@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/start_background">
 
@@ -8,8 +10,9 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_above="@+id/btn_start_reg"
         android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
+        android:layout_marginBottom="98dp"
         android:text="Welcome to We Talk"
         android:textColor="@color/white"
         android:textSize="30dp" />
@@ -18,28 +21,28 @@
         android:id="@+id/btn_start_signin"
         android:layout_width="300dp"
         android:layout_height="50dp"
-        android:layout_below="@+id/textView"
+        android:layout_alignBottom="@+id/btn_start_reg"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="75dp"
+        android:layout_marginBottom="68dp"
         android:background="@color/red"
         android:text="@string/have_account"
         android:textColor="@color/white"
         android:textSize="@dimen/default_font_size"
-        android:typeface="sans"/>
+        android:typeface="sans" />
 
     <Button
         android:id="@+id/btn_start_reg"
         android:layout_width="300dp"
         android:layout_height="50dp"
-        android:layout_alignStart="@+id/btn_start_signin"
-        android:layout_below="@+id/btn_start_signin"
+        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="28dp"
+        android:layout_marginBottom="81dp"
+        android:background="@color/white"
         android:text="@string/need_account"
         android:textColor="@color/black"
-        android:background="@color/white"
         android:textSize="@dimen/default_font_size"
-        android:typeface="sans"/>
+        android:typeface="sans" />
+
 
 
 </RelativeLayout>

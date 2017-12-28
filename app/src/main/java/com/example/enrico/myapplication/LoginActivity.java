@@ -16,6 +16,9 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.iid.FirebaseInstanceId;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -28,6 +31,7 @@ public class LoginActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private ProgressDialog mLoginProgress;
     private RSACryptography mRSA = new RSACryptography();
+    private DatabaseReference mUserDb;
 
 
     @Override
@@ -44,6 +48,7 @@ public class LoginActivity extends AppCompatActivity {
         mBtnSignup = (TextView) findViewById(R.id.btn_login_singup);
         mFPass = (TextView) findViewById(R.id.btn_login_fpass);
         mLoginProgress = new ProgressDialog(this);
+        mUserDb = FirebaseDatabase.getInstance().getReference().child("Users");
 
         mBtnSignup.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -88,6 +93,19 @@ public class LoginActivity extends AppCompatActivity {
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
                     mLoginProgress.dismiss();
+
+                    String current_uid = mAuth.getCurrentUser().getUid();
+
+                    // SAVE THE PHONE'S TOKEN ID
+                    String deviceToken = FirebaseInstanceId.getInstance().getToken();
+                    mUserDb.child(current_uid).child("device_token").setValue(deviceToken).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if(task.isSuccessful()){
+
+                            }
+                        }
+                    });
                     goToMain();
                 } else {
                     mLoginProgress.hide();
