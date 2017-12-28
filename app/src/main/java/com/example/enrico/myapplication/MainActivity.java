@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         mToolbar = (Toolbar) findViewById(R.id.main_page_toolbar);
         setSupportActionBar(mToolbar);
-        getSupportActionBar().setTitle("We Talk"); // set title of action bar
+        getSupportActionBar().setTitle("WeTalk"); // set title of action bar
 
         //Tabs
         mViewPager = (ViewPager) findViewById(R.id.tabPager);

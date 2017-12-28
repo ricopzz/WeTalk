@@ -28,6 +28,7 @@
     <uses-permission android:name="com.example.enrico.myapplication.permission.C2D_MESSAGE" />
 
     <application
+        android:name="com.example.enrico.myapplication.WeTalk"
         android:allowBackup="true"
         android:debuggable="true"
         android:icon="@mipmap/ic_launcher"
@@ -56,6 +57,7 @@
         <activity
             android:name="com.example.enrico.myapplication.UsersActivity"
             android:parentActivityName="com.example.enrico.myapplication.MainActivity" />
+        <activity android:name="com.example.enrico.myapplication.ProfileActivity" />
 
         <meta-data
             android:name="android.support.VERSION"

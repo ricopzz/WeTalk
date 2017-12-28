@@ -10,13 +10,23 @@ public class Users {
     public String image;
     public String status;
     public String username;
+    public String thumb_image;
+
+    public String getThumb_image() {
+        return thumb_image;
+    }
+
+    public void setThumb_image(String thumb_image) {
+        this.thumb_image = thumb_image;
+    }
 
     public Users(){}
 
-    public Users(String name, String image, String status, String username) {
+    public Users(String name, String image, String status, String username, String thumb_image) {
         this.name = name;
         this.image = image;
         this.status = status;
+        this.thumb_image = thumb_image;
         this.username = username;
     }
 
