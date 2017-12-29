@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimaryDark"
     tools:context="com.example.enrico.myapplication.SettingsActivity">
 
     <RelativeLayout
@@ -13,7 +12,7 @@
         android:layout_alignParentStart="true"
         android:layout_alignTop="@+id/pic_settings"
         android:layout_marginTop="92dp"
-        android:background="@color/white">
+        android:background="@color/grey">
 
         <TextView
             android:layout_width="match_parent"
@@ -36,7 +35,7 @@
             android:layout_marginTop="12dp"
             android:text="Hi there, I'm using We Talk!"
             android:textAlignment="center"
-            android:textColor="@color/grey"
+            android:textColor="@color/black"
             android:textSize="@dimen/default_font_size"
             android:id="@+id/settings_status" />
 

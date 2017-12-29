@@ -114,7 +114,7 @@ public class UsersActivity extends AppCompatActivity {
 
         public void setDisplayPicture(String thumb_image, Context ctx){
             CircleImageView displaypicView = (CircleImageView) mView.findViewById(R.id.user_display_picture);
-            Picasso.with(ctx).load(thumb_image).placeholder(R.drawable.main_bg).into(displaypicView);
+            Picasso.with(ctx).load(thumb_image).placeholder(R.drawable.default_user_icon).into(displaypicView);
         }
     }
 

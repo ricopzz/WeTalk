@@ -1,0 +1,3 @@
+# Referenced at /Users/enrico/AndroidStudioProjects/MyApplication/app/build/intermediates/manifests/full/debug/AndroidManifest.xml:30
+-keep class com.example.enrico.myapplication.WeTalk { <init>(...); }
+

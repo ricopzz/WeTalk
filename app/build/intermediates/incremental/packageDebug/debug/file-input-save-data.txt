@@ -1,7 +1,11 @@
 #Internal package file, do not edit.
-#Fri Dec 29 02:22:43 WIB 2017
+#Sat Dec 30 00:54:50 WIB 2017
+1.base=/Users/enrico/AndroidStudioProjects/MyApplication/app/build/intermediates/transforms/dexMerger/debug/200
 0.baseType=DIRECTORY
-0.base=/Users/enrico/AndroidStudioProjects/MyApplication/app/build/intermediates/transforms/dexMerger/debug/151
+1.baseType=DIRECTORY
+count=2
+1.set=DEX
 0.path=classes.dex
 0.set=DEX
-count=1
+0.base=/Users/enrico/AndroidStudioProjects/MyApplication/app/build/intermediates/transforms/dexMerger/debug/208
+1.path=classes.dex

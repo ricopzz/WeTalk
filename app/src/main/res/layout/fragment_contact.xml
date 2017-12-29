@@ -5,9 +5,9 @@
     tools:context="com.example.enrico.myapplication.ContactFragment">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <android.support.v7.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:id="@+id/list_friendlist"></android.support.v7.widget.RecyclerView>
 
 </FrameLayout>

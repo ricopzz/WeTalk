@@ -2,10 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.enrico.myapplication"
     android:versionCode="1"
-    android:versionName="1.0" >
+    android:versionName="1.5.1" >
 
     <uses-sdk
-        android:minSdkVersion="19"
+        android:minSdkVersion="21"
         android:targetSdkVersion="26" />
 
     <!-- To auto-complete the email text field in the login form with the user's emails -->
@@ -69,6 +69,9 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
+        <activity
+            android:name="com.example.enrico.myapplication.ChatActivity"
+            android:parentActivityName="com.example.enrico.myapplication.MainActivity" />
 
         <meta-data
             android:name="android.support.VERSION"

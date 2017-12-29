@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.content.Intent;
 import java.util.HashMap;
+import java.util.Map;
 
 import com.firebase.client.Firebase;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -79,7 +80,7 @@ public class RegisterActivity extends Activity {
 
                 byte[] encrypted = mRsa.encrypt(password.getBytes());
 
-                if(!TextUtils.isEmpty(fullName) && !TextUtils.isEmpty(email ) && !TextUtils.isEmpty(password) && !TextUtils.isEmpty(username)){
+                if(!TextUtils.isEmpty(fullName) && !TextUtils.isEmpty(email) && !TextUtils.isEmpty(password) && !TextUtils.isEmpty(username)){
                     mRegProgress.setTitle("Registering User");
                     mRegProgress.setMessage("Please wait while we are registering user");
                     mRegProgress.setCanceledOnTouchOutside(false);
@@ -142,8 +143,8 @@ public class RegisterActivity extends Activity {
                     byte[] encryptedThumb = mRsa.encrypt("default".getBytes());
                     usermap.put("name",fullName);
                     usermap.put("status","Hi there, I'm using We Talk!");
-                    usermap.put("username",username);
                     usermap.put("image","https://ind.proz.com/zf/images/default_user_512px.png");
+                    usermap.put("username",username);
                     usermap.put("thumb_image","DEFAULT");
                     usermap.put("device_token",deviceToken);
 
@@ -160,7 +161,7 @@ public class RegisterActivity extends Activity {
                                 finish();
                             }
                             else{
-
+                                mRegProgress.dismiss();
                             }
                         }
                     });

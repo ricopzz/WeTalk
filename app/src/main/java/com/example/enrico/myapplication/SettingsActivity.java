@@ -90,7 +90,6 @@ public class SettingsActivity extends AppCompatActivity {
                 String name = dataSnapshot.child("name").getValue().toString();
                 byte[] encrypted_name = name.getBytes();
                 String DECRYPTED_name = mRsa.decrypt(encrypted_name).toString();
-                Toast.makeText(SettingsActivity.this,name,Toast.LENGTH_LONG).show();
                 final String img = dataSnapshot.child("image").getValue().toString();
                 String status = dataSnapshot.child("status").getValue().toString();
                 String thumb_img = dataSnapshot.child("thumb_image").getValue().toString();
@@ -102,7 +101,7 @@ public class SettingsActivity extends AppCompatActivity {
                 if(!img.equals("default")) {
                     //Picasso.with(SettingsActivity.this).load(img).placeholder(R.drawable.main_bg).into(mDisplayImage);
                     Picasso.with(SettingsActivity.this).load(img).networkPolicy(NetworkPolicy.OFFLINE)
-                            .placeholder(R.drawable.main_bg).into(mDisplayImage, new Callback() {
+                            .placeholder(R.drawable.default_user_icon).into(mDisplayImage, new Callback() {
                         @Override
                         public void onSuccess() {
 
@@ -110,7 +109,7 @@ public class SettingsActivity extends AppCompatActivity {
 
                         @Override
                         public void onError() {
-                            Picasso.with(SettingsActivity.this).load(img).placeholder(R.drawable.main_bg).into(mDisplayImage);
+                            Picasso.with(SettingsActivity.this).load(img).placeholder(R.drawable.default_user_icon).into(mDisplayImage);
                         }
                     });
                 }
@@ -254,4 +253,5 @@ public class SettingsActivity extends AppCompatActivity {
         }
         return randomString.toString();
     }
+
 }

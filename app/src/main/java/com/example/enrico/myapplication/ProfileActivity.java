@@ -43,9 +43,12 @@ public class ProfileActivity extends AppCompatActivity {
     private DatabaseReference mRootRef;
     private FirebaseUser mCurrentUser;
 
+    private FirebaseAuth mAuth;
+
     private ProgressDialog mProgressDialog;
 
     private int current_state = 0; // 0 not friend, 1 req sent, 2 req received, 3 friends
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -281,7 +284,7 @@ public class ProfileActivity extends AppCompatActivity {
                 // REQUEST RECEIVED
 
                 if(current_state==2){
-                    final String current_date = DateFormat.getDateInstance().format(new Date());
+                    final String current_date = DateFormat.getDateTimeInstance().format(new Date());
 
                     Map friendsMap = new HashMap();
                     friendsMap.put("Friends/" + mCurrentUser.getUid() + "/" + user_id + "/date", current_date);
@@ -384,6 +387,6 @@ public class ProfileActivity extends AppCompatActivity {
                 }
             }
         });
-    }
 
+    }
 }

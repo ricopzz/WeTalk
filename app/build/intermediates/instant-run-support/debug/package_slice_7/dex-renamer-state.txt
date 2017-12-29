@@ -1,4 +1,4 @@
-#Fri Dec 29 01:52:00 WIB 2017
-base.0=/Users/enrico/AndroidStudioProjects/MyApplication/app/build/intermediates/transforms/dexMerger/debug/140
+#Fri Dec 29 20:30:43 WIB 2017
+base.0=/Users/enrico/AndroidStudioProjects/MyApplication/app/build/intermediates/transforms/dexMerger/debug/197
 path.0=classes.dex
 renamed.0=classes.dex

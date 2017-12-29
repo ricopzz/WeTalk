@@ -11,8 +11,11 @@ import android.view.MenuItem;
 import android.support.v4.view.ViewPager;
 
 import com.firebase.client.Firebase;
+import com.firebase.client.ServerValue;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -21,6 +24,8 @@ public class MainActivity extends AppCompatActivity {
 
     private ViewPager mViewPager;
     private SectionsPagerAdapter mSectionPagerAdapter; // for tab pages
+
+    private DatabaseReference mUserRef;
 
     private TabLayout mTabLayout;
 
@@ -31,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
         mToolbar = (Toolbar) findViewById(R.id.main_page_toolbar);
+
         setSupportActionBar(mToolbar);
         getSupportActionBar().setTitle("WeTalk"); // set title of action bar
 
@@ -47,10 +53,24 @@ public class MainActivity extends AppCompatActivity {
     public void onStart() {
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
-        FirebaseUser currentUser = mAuth.getCurrentUser();
 
+        FirebaseUser currentUser = mAuth.getCurrentUser();
         if(currentUser == null){
             sendToStart();
+        } else {
+            mUserRef = FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid());
+            mUserRef.child("online").setValue("true");
+        }
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        if(currentUser!=null) {
+            mUserRef = FirebaseDatabase.getInstance().getReference().child("Users").child(mAuth.getCurrentUser().getUid());
+            mUserRef.child("online").setValue(ServerValue.TIMESTAMP);
         }
     }
 

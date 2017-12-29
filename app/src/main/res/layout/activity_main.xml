@@ -8,7 +8,8 @@
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:id="@+id/MainBarLayout">
 
         <include layout="@layout/app_bar_layout" android:id="@+id/main_page_toolbar"/>
 
@@ -25,7 +26,9 @@
     <android.support.v4.view.ViewPager
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/tabPager">
+        android:id="@+id/tabPager"
+        android:layout_below="@id/MainBarLayout"
+        tools:ignore="UnknownId">
 
 
     </android.support.v4.view.ViewPager>
