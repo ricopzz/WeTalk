@@ -34,44 +34,6 @@
         android:textColor="@color/white"
         android:textSize="14sp"/>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true"
-        android:orientation="horizontal">
 
-        <ImageButton
-            android:id="@+id/chat_addimage"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="0.2"
-            android:background="@color/white"
-            app:srcCompat="@drawable/ic_add_a_photo_black_24dp" />
-
-        <EditText
-            android:id="@+id/chat_message_input"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@color/white"
-            android:hint="Enter message here ..."
-            android:paddingBottom="16dp"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            android:paddingTop="16dp"
-            android:textColor="@color/black"
-            android:textColorHint="@color/grey"
-            android:textSize="@dimen/input_font_size" />
-
-        <ImageButton
-            android:id="@+id/chat_send"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_weight="0.2"
-            android:background="@color/white"
-            app:srcCompat="@drawable/ic_send_black_24dp" />
-
-    </LinearLayout>
 
 </RelativeLayout>
