@@ -1,10 +1,25 @@
 {
     "logs": [
         {
-            "outputFile": "/Users/enrico/AndroidStudioProjects/MyApplication/app/build/intermediates/incremental/mergeDebugAndroidTestResources/merged.dir/values-v18/values-v18.xml",
+            "outputFile": "C:\\Users\\enrico\\AndroidStudioProjects\\MyApplication\\app\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values-v18\\values-v18.xml",
             "map": [
                 {
-                    "source": "/Users/enrico/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.0.2.aar/bb04d4010ea9c4061a4719b146616f0a/res/values-v18/values-v18.xml",
+                    "source": "C:\\Users\\enrico\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-27.0.2.aar\\bb04d4010ea9c4061a4719b146616f0a\\res\\values-v18\\values-v18.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "48",
+                        "endOffsets": "99"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "C:\\Users\\enric\\Documents\\WeTalk\\app\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values-v18\\values-v18.xml",
+            "map": [
+                {
+                    "source": "C:\\Users\\enric\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-27.0.2.aar\\dedf9d10f8e01ae1391dde4228dd46c9\\res\\values-v18\\values-v18.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",

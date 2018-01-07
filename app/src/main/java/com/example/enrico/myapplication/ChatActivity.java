@@ -3,6 +3,7 @@ package com.example.enrico.myapplication;
 import android.content.Context;
 import android.content.Intent;
 import android.media.Image;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -23,6 +24,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ServerValue;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Callback;
@@ -56,10 +58,19 @@ public class ChatActivity extends AppCompatActivity {
     private EditText mTextSent;
 
     private RecyclerView mMessagesView;
+    private SwipeRefreshLayout mRefreshLayout;
 
     private final List<Messages> messagesList = new ArrayList<>();
     private LinearLayoutManager mLinearLayout;
     private MessageAdapter messageAdapter;
+
+    private static final int TOTAL_ITEMS_LOADED = 20;
+    private int mCurrentPage = 1;
+
+    //save last loaded message
+    private int itemPos = 0;
+    private String mLastKey = "";
+    private String mPrevKey = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,8 +82,6 @@ public class ChatActivity extends AppCompatActivity {
         mRootRef = FirebaseDatabase.getInstance().getReference();
         mAuth = FirebaseAuth.getInstance();
         mCurrentUserID = mAuth.getCurrentUser().getUid();
-
-
 
 
         mToolbar = (Toolbar) findViewById(R.id.chat_app_bar);
@@ -101,6 +110,7 @@ public class ChatActivity extends AppCompatActivity {
         messageAdapter = new MessageAdapter(messagesList);
 
         mMessagesView = (RecyclerView) findViewById(R.id.messages_view);
+        mRefreshLayout = (SwipeRefreshLayout) findViewById(R.id.message_refresh_layout);
         mLinearLayout = new LinearLayoutManager(this);
 
         mMessagesView.setHasFixedSize(true);
@@ -111,6 +121,37 @@ public class ChatActivity extends AppCompatActivity {
         loadMessages();
 
         mName.setText(mReceiverName);
+
+        // IDK WHY THIS DOESNT WORK
+        mRootRef.child("Chat").child(mCurrentUserID).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                if(!dataSnapshot.hasChild(mReceiverUserID)){
+                    Map chatAddMap = new HashMap();
+                    chatAddMap.put("seen",false);
+                    chatAddMap.put("timestamp", ServerValue.TIMESTAMP);
+
+                    Map chatUserMap = new HashMap();
+                    chatUserMap.put("Chat/" + mCurrentUserID + "/" + mReceiverUserID, chatAddMap);
+                    chatUserMap.put("Chat/" + mReceiverUserID + "/" + mCurrentUserID, chatAddMap);
+
+                    mRootRef.updateChildren(chatUserMap, new DatabaseReference.CompletionListener() {
+                        @Override
+                        public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
+                            if(databaseError!=null){
+                                Log.d("CHAT_LOG", databaseError.getMessage().toString());
+                            }
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
 
         // TO SHOW ONLINE STATUS
         mRootRef.child("Users").child(mReceiverUserID).addValueEventListener(new ValueEventListener() {
@@ -151,42 +192,21 @@ public class ChatActivity extends AppCompatActivity {
         });
 
 
-        mRootRef.child("Chat").child(mCurrentUserID).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-
-                if(dataSnapshot.hasChild(mReceiverUserID)){
-                    Map chatAddMap = new HashMap();
-                    chatAddMap.put("seen",false);
-                    chatAddMap.put("timestamp", ServerValue.TIMESTAMP);
-
-                    Map chatUserMap = new HashMap();
-                    chatUserMap.put("Chat/" + mCurrentUserID + "/" + mReceiverUserID, chatAddMap);
-                    chatUserMap.put("Chat/" + mReceiverUserID + "/" + mCurrentUserID, chatAddMap);
-
-                    mRootRef.updateChildren(chatUserMap, new DatabaseReference.CompletionListener() {
-                        @Override
-                        public void onComplete(DatabaseError databaseError, DatabaseReference databaseReference) {
-                            if(databaseError!=null){
-                                Log.d("CHAT_LOG", databaseError.getMessage().toString());
-                            }
-                        }
-                    });
-                }
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-
         // BUTTON CLICK
 
         mSend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 sendMessage();
+            }
+        });
+
+        mRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                mCurrentPage++;
+                itemPos = 0;
+                loadNextMessages();
             }
         });
     }
@@ -230,16 +250,82 @@ public class ChatActivity extends AppCompatActivity {
         }
     }
 
+    private void loadNextMessages(){
+        DatabaseReference messageRef = mRootRef.child("Messages").child(mCurrentUserID).child(mReceiverUserID);
+
+        Query messageQuery = messageRef.orderByKey().endAt(mLastKey).limitToLast(20);
+
+        messageQuery.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+                Messages message = dataSnapshot.getValue(Messages.class);
+                String messageKey = dataSnapshot.getKey();
+
+                if(!mPrevKey.equals(messageKey)){
+                    messagesList.add(itemPos++, message);
+                } else {
+                    mPrevKey = mLastKey;
+                }
+
+                if(itemPos == 1){
+                    mLastKey = messageKey;
+                }
+
+
+                messageAdapter.notifyDataSetChanged();
+                mMessagesView.scrollToPosition(messagesList.size() - 1); // shows the botto of recycler view
+                mRefreshLayout.setRefreshing(false);
+                mLinearLayout.scrollToPositionWithOffset(itemPos,0);
+            }
+
+            @Override
+            public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
+
     private void loadMessages(){
 
-        mRootRef.child("Messages").child(mCurrentUserID).child(mReceiverUserID).addChildEventListener(new ChildEventListener() {
+        DatabaseReference messageRef = mRootRef.child("Messages").child(mCurrentUserID).child(mReceiverUserID);
+
+        Query messageQuery = messageRef.limitToLast(mCurrentPage * TOTAL_ITEMS_LOADED); // limit the query to only shows the last number of conv
+
+        messageQuery.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
 
                 Messages message = dataSnapshot.getValue(Messages.class);
+                String messageKey = dataSnapshot.getKey();
+
+                itemPos++;
+
+                if(itemPos == 1){
+                    mLastKey = messageKey;
+                    mPrevKey = messageKey;
+                }
 
                 messagesList.add(message);
                 messageAdapter.notifyDataSetChanged();
+
+                mMessagesView.scrollToPosition(messagesList.size() - 1); // shows the botto of recycler view
+
+                mRefreshLayout.setRefreshing(false);
             }
 
             @Override

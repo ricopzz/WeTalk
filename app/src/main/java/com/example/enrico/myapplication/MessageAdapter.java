@@ -1,14 +1,18 @@
 package com.example.enrico.myapplication;
 
+import android.content.Context;
 import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.List;
 
@@ -19,7 +23,7 @@ import java.util.List;
 public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageViewHolder> {
 
     private List<Messages> mMessageList;
-    FirebaseAuth mAuth = FirebaseAuth.getInstance();
+    private FirebaseAuth mAuth;
 
 
     public MessageAdapter(List<Messages> mMessageList){
@@ -28,6 +32,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
 
     @Override
     public MessageViewHolder onCreateViewHolder(ViewGroup parent, int viewType){
+
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.message_single_layout,parent,false);
 
         return new MessageViewHolder(v);
@@ -35,22 +40,27 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
 
     @Override
     public void onBindViewHolder(MessageViewHolder viewHolder, int position) {
-        String current_user_id = mAuth.getCurrentUser().getUid();
-
+        mAuth = FirebaseAuth.getInstance();
+        FirebaseUser current_user = mAuth.getCurrentUser();
 
         Messages c = mMessageList.get(position);
 
         String from_user = c.getFrom();
+        Log.d("TAG",from_user);
 
-        if(from_user.equals(current_user_id)){
-            viewHolder.messageText.setBackgroundResource(R.drawable.message_text_sender_background);
-            viewHolder.messageText.setTextColor(Color.BLACK);
-        } else {
-            viewHolder.messageText.setBackgroundResource(R.drawable.message_text_background);
-            viewHolder.messageText.setTextColor(Color.WHITE);
+        if(current_user != null){
+            if(from_user.equals(current_user.getUid())){
+                viewHolder.messageText.setBackgroundResource(R.drawable.message_text_sender_background);
+                viewHolder.messageText.setTextColor(Color.BLACK);
+            } else {
+                viewHolder.messageText.setBackgroundResource(R.drawable.message_text_background);
+                viewHolder.messageText.setTextColor(Color.WHITE);
+            }
+            viewHolder.messageText.setText(c.getMessage());
+            //viewHolder.timeText.setText(c.getTime());
         }
-        viewHolder.messageText.setText(c.getMessage());
-        //viewHolder.timeText.setText(c.getTime());
+
+
     }
 
     @Override

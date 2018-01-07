@@ -1,7 +1,7 @@
-#Sat Jan 06 19:38:03 WIB 2018
-base.0=/Users/enrico/AndroidStudioProjects/MyApplication/app/build/intermediates/transforms/dexMerger/debug/208
+#Sun Jan 07 17:04:55 ICT 2018
+base.0=C\:\\Users\\enric\\Documents\\WeTalk\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\200
 path.1=classes.dex
 renamed.1=classes2.dex
 path.0=classes.dex
 renamed.0=classes.dex
-base.1=/Users/enrico/AndroidStudioProjects/MyApplication/app/build/intermediates/transforms/dexMerger/debug/200
+base.1=C\:\\Users\\enric\\Documents\\WeTalk\\app\\build\\intermediates\\transforms\\dexMerger\\debug\\225
